@@ -1,0 +1,33 @@
+<section class="content">
+    <h1>Pokedex</h1>
+    <ol id="pokemonList" class="pokemons">
+        <li class="card pokemon flex-column m-2" *ngFor="let pokemon of pokemonList; let i = index">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="justify-content-center align-items-center">
+                    <span class="row pokemon-title m-2">{{pokemon.name}}</span>
+                    <img class="row pokemon-image" src="{{ pokemon.sprites.front_default }}" alt="Pokemon Image">
+                </div>
+            </div>
+            <button class="btn btn-primary m-3" type="button" (click)="abrirCollapse(i)">
+                Detalhes
+            </button>
+            <div class="content-tr" *ngIf="pokemon && selectedItem?.semana === i">
+                <div class="collapse table-collapse w-100" [id]="'collapse-' + i" [class.show]="mostrarCollapse[i]">
+                    <ng-container *ngFor="let item of pokemon.types">
+                        <div class="card card-body m-3" class="item {{ item.type.name }}">
+                            <div>
+                                Espécie: {{ pokemon.species.name }}
+                            </div>
+                            <div>
+                                Tipo: {{ item.type.name }}
+                            </div>
+                            <div>
+                                Altura: {{ pokemon.height }}
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </li>
+    </ol>
+</section>
